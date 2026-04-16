@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Flight Ticket</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f0f2f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* MAIN TICKET */
+.ticket {
+  display: flex;
+  width: 850px;
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* LEFT SIDE */
+.ticket-left {
+  flex: 3;
+  padding: 25px;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+  color: #2d3e50;
+}
+
+.title {
+  text-align: center;
+  font-size: 26px;
+  margin: 10px 0 20px;
+  font-weight: bold;
+}
+
+/* INFO GRID */
+.info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.info div {
+  font-size: 14px;
+}
+
+.label {
+  color: gray;
+  font-size: 12px;
+}
+
+/* BOTTOM BOX */
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  background: #eef2f7;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.box {
+  text-align: center;
+}
+
+.box span {
+  display: block;
+  font-size: 12px;
+  color: gray;
+}
+
+.box strong {
+  font-size: 18px;
+}
+
+/* RIGHT SIDE */
+.ticket-right {
+  flex: 1.5;
+  border-left: 2px dashed #ccc;
+  padding: 25px;
+  text-align: center;
+}
+
+.pnr {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+/* FAKE QR */
+.qr {
+  width: 120px;
+  height: 120px;
+  background: repeating-linear-gradient(
+    45deg,
+    black,
+    black 5px,
+    white 5px,
+    white 10px
+  );
+  margin: 10px auto;
+}
+
+/* BUTTON */
+.download {
+  margin-top: 15px;
+  background: green;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="ticket">
+
+  <!-- LEFT -->
+  <div class="ticket-left">
+    <div class="logo">✈ IndiGo</div>
+    <div class="title">Boarding Pass</div>
+
+    <div class="info">
+      <div>
+        <div class="label">Passenger</div>
+        <strong id="passenger">Santosh Kumar</strong>
+      </div>
+
+      <div>
+        <div class="label">Flight</div>
+        <strong id="flight"></strong>
+      </div>
+
+      <div>
+        <div class="label">Route</div>
+        <strong id="route"></strong>
+      </div>
+
+      <div>
+        <div class="label">Departure</div>
+        <strong id="time"></strong>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <div class="box">
+        <span>Gate</span>
+        <strong>12</strong>
+      </div>
+
+      <div class="box">
+        <span>Seat</span>
+        <strong>14A</strong>
+      </div>
+
+      <div class="box">
+        <span>PNR</span>
+        <strong id="pnr"></strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="ticket-right">
+    <div class="pnr" id="pnr2"></div>
+
+    <div class="qr"></div>
+
+    <div class="download" onclick="downloadTicket()">
+      Download Ticket
+    </div>
+  </div>
+
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+
+const flight = params.get("flight") || "N/A";
+const from = params.get("from") || "N/A";
+const to = params.get("to") || "N/A";
+const time = params.get("time") || "N/A";
+
+/* RANDOM PNR */
+const pnr = "PNR" + Math.floor(Math.random() * 100000);
+
+document.getElementById("flight").innerText = flight;
+document.getElementById("route").innerText = from + " → " + to;
+document.getElementById("time").innerText = time;
+document.getElementById("pnr").innerText = pnr;
+document.getElementById("pnr2").innerText = pnr;
+
+function downloadTicket() {
+  window.print();
+}
+</script>
+
+</body>
+</html>
