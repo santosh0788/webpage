@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Flight Ticket</title>
 
 <style>
@@ -25,26 +26,25 @@ body {
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
-/* LEFT SIDE */
+/* LEFT */
 .ticket-left {
   flex: 3;
   padding: 25px;
 }
 
 .logo {
-  font-size: 28px;
+  font-size: 26px;
   font-weight: bold;
-  color: #2d3e50;
 }
 
 .title {
   text-align: center;
-  font-size: 26px;
-  margin: 10px 0 20px;
+  font-size: 24px;
+  margin: 15px 0;
   font-weight: bold;
 }
 
-/* INFO GRID */
+/* GRID */
 .info {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -52,16 +52,12 @@ body {
   margin-bottom: 20px;
 }
 
-.info div {
-  font-size: 14px;
-}
-
 .label {
-  color: gray;
   font-size: 12px;
+  color: gray;
 }
 
-/* BOTTOM BOX */
+/* BOTTOM */
 .bottom {
   display: flex;
   justify-content: space-between;
@@ -75,7 +71,6 @@ body {
 }
 
 .box span {
-  display: block;
   font-size: 12px;
   color: gray;
 }
@@ -84,7 +79,7 @@ body {
   font-size: 18px;
 }
 
-/* RIGHT SIDE */
+/* RIGHT */
 .ticket-right {
   flex: 1.5;
   border-left: 2px dashed #ccc;
@@ -93,15 +88,16 @@ body {
 }
 
 .pnr {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: bold;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 /* FAKE QR */
 .qr {
   width: 120px;
   height: 120px;
+  margin: 10px auto;
   background: repeating-linear-gradient(
     45deg,
     black,
@@ -109,7 +105,6 @@ body {
     white 5px,
     white 10px
   );
-  margin: 10px auto;
 }
 
 /* BUTTON */
@@ -121,6 +116,10 @@ body {
   border-radius: 8px;
   cursor: pointer;
 }
+
+.download:hover {
+  background: darkgreen;
+}
 </style>
 </head>
 
@@ -128,15 +127,17 @@ body {
 
 <div class="ticket">
 
-  <!-- LEFT -->
+  <!-- LEFT SIDE -->
   <div class="ticket-left">
-    <div class="logo">✈ IndiGo</div>
+
+    <div class="logo">✈ SkyLine Airlines</div>
     <div class="title">Boarding Pass</div>
 
     <div class="info">
+
       <div>
         <div class="label">Passenger</div>
-        <strong id="passenger">Santosh Kumar</strong>
+        <strong id="passenger"></strong>
       </div>
 
       <div>
@@ -150,12 +151,14 @@ body {
       </div>
 
       <div>
-        <div class="label">Departure</div>
+        <div class="label">Time</div>
         <strong id="time"></strong>
       </div>
+
     </div>
 
     <div class="bottom">
+
       <div class="box">
         <span>Gate</span>
         <strong>12</strong>
@@ -170,11 +173,14 @@ body {
         <span>PNR</span>
         <strong id="pnr"></strong>
       </div>
+
     </div>
+
   </div>
 
-  <!-- RIGHT -->
+  <!-- RIGHT SIDE -->
   <div class="ticket-right">
+
     <div class="pnr" id="pnr2"></div>
 
     <div class="qr"></div>
@@ -182,30 +188,37 @@ body {
     <div class="download" onclick="downloadTicket()">
       Download Ticket
     </div>
+
   </div>
 
 </div>
 
 <script>
+
+/* GET URL DATA */
 const params = new URLSearchParams(window.location.search);
 
-const flight = params.get("flight") || "N/A";
-const from = params.get("from") || "N/A";
-const to = params.get("to") || "N/A";
-const time = params.get("time") || "N/A";
+/* GET LOGIN USER */
+const user = localStorage.getItem("user") || "Guest";
+
+/* SET DATA */
+document.getElementById("passenger").innerText = user;
+document.getElementById("flight").innerText = params.get("flight") || "N/A";
+document.getElementById("route").innerText =
+  (params.get("from") || "N/A") + " → " + (params.get("to") || "N/A");
+document.getElementById("time").innerText = params.get("time") || "N/A";
 
 /* RANDOM PNR */
 const pnr = "PNR" + Math.floor(Math.random() * 100000);
 
-document.getElementById("flight").innerText = flight;
-document.getElementById("route").innerText = from + " → " + to;
-document.getElementById("time").innerText = time;
 document.getElementById("pnr").innerText = pnr;
 document.getElementById("pnr2").innerText = pnr;
 
+/* DOWNLOAD */
 function downloadTicket() {
   window.print();
 }
+
 </script>
 
 </body>
