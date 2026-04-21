@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Explore World</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="logo">⬛ Logo</div>
+
+  <nav>
+    <a href="#">Home</a>
+    <a href="#about">About Us</a>
+    <a href="#services">Content</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <div class="nav-right">
+    <input type="text" placeholder="Search">
+    <div class="menu">☰</div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+
+  <div class="left">
+    <h1>Explore <br><span>the</span> World</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+    <div class="arrow-btn">→</div>
+
+    <!-- FORM -->
+    <form class="form-box" action="flights.html" method="GET" target="_blank">
+
+      <div>
+        <label>From</label>
+        <select name="from">
+          <option>India</option>
+          <option>USA</option>
+          <option>Japan</option>
+          <option>Germany</option>
+        </select>
+      </div>
+
+      <div>
+        <label>To</label>
+        <select name="to">
+          <option>Japan</option>
+          <option>India</option>
+          <option>USA</option>
+          <option>Germany</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Expected date</label>
+        <input type="date" name="date">
+      </div>
+
+      <button type="submit">Search</button>
+
+    </form>
+
+    <!-- CARDS -->
+    <div class="price-box">
+      <div class="card"><h3>Bronze</h3><h2>$300</h2></div>
+      <div class="card"><h3>Silver</h3><h2>$400</h2></div>
+      <div class="card"><h3>Gold</h3><h2>$500</h2></div>
+      <div class="card"><h3>Platinum</h3><h2>$1000</h2></div>
+    </div>
+
+  </div>
+
+  <div class="right">
+    <div class="discount">20% OFF</div>
+    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee">
+  </div>
+
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <h2>About Us</h2>
+  <p>We provide best travel experience with affordable packages worldwide.</p>
+
+  <div class="about-box">
+    <div>🌍 50+ Destinations</div>
+    <div>✈️ Easy Booking</div>
+    <div>💰 Best Price</div>
+    <div>⭐ Premium Service</div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <h2>Our Services</h2>
+
+  <div class="service-cards">
+    <div class="service">
+      <h3>✈️ Flights</h3>
+      <p>Book flights easily at best prices.</p>
+    </div>
+
+    <div class="service">
+      <h3>🏨 Hotels</h3>
+      <p>Luxury and budget hotel options.</p>
+    </div>
+
+    <div class="service">
+      <h3>🚗 Packages</h3>
+      <p>Complete travel packages.</p>
+    </div>
+
+    <div class="service">
+      <h3>🗺️ Guide</h3>
+      <p>Explore with expert guides.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <h2>Contact Us</h2>
+
+  <form class="contact-form">
+    <input type="text" placeholder="Name">
+    <input type="email" placeholder="Email">
+    <textarea placeholder="Message"></textarea>
+    <button>Send</button>
+  </form>
+</section>
+
+</body>
+</html>
