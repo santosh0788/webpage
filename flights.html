@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Flight Results</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f5f5f5;
+      padding: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .route {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #555;
+    }
+
+    .flight {
+      background: white;
+      padding: 20px;
+      margin: 15px auto;
+      width: 80%;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .details {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .time {
+      text-align: center;
+    }
+
+    .time h3 {
+      margin: 0;
+    }
+
+    .duration {
+      font-size: 12px;
+      color: gray;
+    }
+
+    .price {
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 5px;
+      text-align: right;
+    }
+
+    .flight-name {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .book-btn {
+      padding: 8px 16px;
+      border-radius: 20px;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .available {
+      background: green;
+    }
+
+    .fast {
+      background: red;
+    }
+
+  </style>
+</head>
+<body>
+
+<h1>Available Flights ✈️</h1>
+
+<div class="route">
+  India → Japan | 01 Apr 2026
+</div>
+
+<!-- FLIGHT 1 -->
+<div class="flight">
+  <div>
+    <div class="flight-name">Indigo 6E101</div>
+    <div class="details">
+      <div class="time"><h3>06:00</h3><p>DEL</p></div>
+      <div class="duration">6h 30m</div>
+      <div class="time"><h3>12:30</h3><p>TYO</p></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="price">$120</div>
+    <a href="booking.html?flight=Indigo 6E101&from=India&to=Japan&time=06:00-12:30&price=120"
+       class="book-btn available">Book Now</a>
+  </div>
+</div>
+
+<!-- FLIGHT 2 -->
+<div class="flight">
+  <div>
+    <div class="flight-name">Air India AI202</div>
+    <div class="details">
+      <div class="time"><h3>08:00</h3><p>DEL</p></div>
+      <div class="duration">7h</div>
+      <div class="time"><h3>15:00</h3><p>TYO</p></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="price">$150</div>
+    <a href="booking.html?flight=Air India AI202&from=India&to=Japan&time=08:00-15:00&price=150"
+       class="book-btn fast">Hurry Filling</a>
+  </div>
+</div>
+
+<!-- FLIGHT 3 -->
+<div class="flight">
+  <div>
+    <div class="flight-name">Vistara UK404</div>
+    <div class="details">
+      <div class="time"><h3>10:00</h3><p>DEL</p></div>
+      <div class="duration">6h 45m</div>
+      <div class="time"><h3>16:45</h3><p>TYO</p></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="price">$180</div>
+    <a href="booking.html?flight=Vistara UK404&from=India&to=Japan&time=10:00-16:45&price=180"
+       class="book-btn available">Book Now</a>
+  </div>
+</div>
+
+<!-- FLIGHT 4 -->
+<div class="flight">
+  <div>
+    <div class="flight-name">Emirates EK505</div>
+    <div class="details">
+      <div class="time"><h3>12:00</h3><p>DEL</p></div>
+      <div class="duration">8h</div>
+      <div class="time"><h3>20:00</h3><p>TYO</p></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="price">$450</div>
+    <a href="booking.html?flight=Emirates EK505&from=India&to=Japan&time=12:00-20:00&price=450"
+       class="book-btn fast">Hurry Filling</a>
+  </div>
+</div>
+
+<!-- FLIGHT 5 -->
+<div class="flight">
+  <div>
+    <div class="flight-name">Qatar Airways QR606</div>
+    <div class="details">
+      <div class="time"><h3>14:00</h3><p>DEL</p></div>
+      <div class="duration">7h 30m</div>
+      <div class="time"><h3>21:30</h3><p>TYO</p></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="price">$500</div>
+    <a href="booking.html?flight=Qatar Airways QR606&from=India&to=Japan&time=14:00-21:30&price=500"
+       class="book-btn available">Book Now</a>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flight Ticket</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f0f2f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* MAIN TICKET */
+.ticket {
+  display: flex;
+  width: 850px;
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* LEFT */
+.ticket-left {
+  flex: 3;
+  padding: 25px;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.title {
+  text-align: center;
+  font-size: 24px;
+  margin: 15px 0;
+  font-weight: bold;
+}
+
+/* GRID */
+.info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.label {
+  font-size: 12px;
+  color: gray;
+}
+
+/* BOTTOM */
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  background: #eef2f7;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.box {
+  text-align: center;
+}
+
+.box span {
+  font-size: 12px;
+  color: gray;
+}
+
+.box strong {
+  font-size: 18px;
+}
+
+/* RIGHT */
+.ticket-right {
+  flex: 1.5;
+  border-left: 2px dashed #ccc;
+  padding: 25px;
+  text-align: center;
+}
+
+.pnr {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* FAKE QR */
+.qr {
+  width: 120px;
+  height: 120px;
+  margin: 10px auto;
+  background: repeating-linear-gradient(
+    45deg,
+    black,
+    black 5px,
+    white 5px,
+    white 10px
+  );
+}
+
+/* BUTTON */
+.download {
+  margin-top: 15px;
+  background: green;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.download:hover {
+  background: darkgreen;
+}
+</style>
+</head>
+
+<body>
+
+<div class="ticket">
+
+  <!-- LEFT SIDE -->
+  <div class="ticket-left">
+
+    <div class="logo">✈ SkyLine Airlines</div>
+    <div class="title">Boarding Pass</div>
+
+    <div class="info">
+
+      <div>
+        <div class="label">Passenger</div>
+        <strong id="passenger"></strong>
+      </div>
+
+      <div>
+        <div class="label">Flight</div>
+        <strong id="flight"></strong>
+      </div>
+
+      <div>
+        <div class="label">Route</div>
+        <strong id="route"></strong>
+      </div>
+
+      <div>
+        <div class="label">Time</div>
+        <strong id="time"></strong>
+      </div>
+
+    </div>
+
+    <div class="bottom">
+
+      <div class="box">
+        <span>Gate</span>
+        <strong>12</strong>
+      </div>
+
+      <div class="box">
+        <span>Seat</span>
+        <strong>14A</strong>
+      </div>
+
+      <div class="box">
+        <span>PNR</span>
+        <strong id="pnr"></strong>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- RIGHT SIDE -->
+  <div class="ticket-right">
+
+    <div class="pnr" id="pnr2"></div>
+
+    <div class="qr"></div>
+
+    <div class="download" onclick="downloadTicket()">
+      Download Ticket
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+/* GET URL DATA */
+const params = new URLSearchParams(window.location.search);
+
+/* GET LOGIN USER */
+const user = localStorage.getItem("user") || "Guest";
+
+/* SET DATA */
+document.getElementById("passenger").innerText = user;
+document.getElementById("flight").innerText = params.get("flight") || "N/A";
+document.getElementById("route").innerText =
+  (params.get("from") || "N/A") + " → " + (params.get("to") || "N/A");
+document.getElementById("time").innerText = params.get("time") || "N/A";
+
+/* RANDOM PNR */
+const pnr = "PNR" + Math.floor(Math.random() * 100000);
+
+document.getElementById("pnr").innerText = pnr;
+document.getElementById("pnr2").innerText = pnr;
+
+/* DOWNLOAD */
+function downloadTicket() {
+  window.print();
+}
+
+</script>
+
+</body>
+</html>
