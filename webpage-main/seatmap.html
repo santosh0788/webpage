@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Select Your Seat</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Segoe UI',sans-serif;
+    background:#f5f7fa;
+    text-align:center;
+    padding:30px;
+}
+
+h2{
+    margin-bottom:25px;
+}
+
+.seat-container{
+    display:grid;
+    grid-template-columns:repeat(6,60px);
+    gap:12px;
+    justify-content:center;
+    margin:30px auto;
+}
+
+.seat{
+    width:60px;
+    height:60px;
+    background:#22c55e;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.seat:hover{
+    transform:scale(1.05);
+}
+
+.seat.selected{
+    background:#2563eb;
+}
+
+.seat.booked{
+    background:#dc2626;
+    cursor:not-allowed;
+}
+
+#selectedSeatsText{
+    font-weight:bold;
+    color:#2563eb;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 30px;
+    border:none;
+    border-radius:10px;
+    background:green;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#15803d;
+}
+</style>
+</head>
+<body>
+
+<h2>Select Your Seat ✈️</h2>
+
+<div class="seat-container" id="seatContainer"></div>
+
+<p>
+Selected Seats:
+<span id="selectedSeatsText">None</span>
+</p>
+
+<button onclick="continueBooking()">Continue</button>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+
+const seatContainer =
+document.getElementById("seatContainer");
+
+let selectedSeats = [];
+
+/* Generate 30 seats */
+
+for(let i=1;i<=30;i++){
+
+    const seat =
+    document.createElement("div");
+
+    seat.className = "seat";
+    seat.innerText = i;
+
+    seat.addEventListener("click",function(){
+
+        if(seat.classList.contains("selected")){
+
+            seat.classList.remove("selected");
+
+            selectedSeats =
+            selectedSeats.filter(
+                s => s !== seat.innerText
+            );
+
+        }else{
+
+            seat.classList.add("selected");
+
+            selectedSeats.push(
+                seat.innerText
+            );
+
+        }
+
+        document.getElementById(
+            "selectedSeatsText"
+        ).innerText =
+        selectedSeats.length
+        ? selectedSeats.join(", ")
+        : "None";
+
+    });
+
+    seatContainer.appendChild(seat);
+
+}
+
+/* Continue */
+
+function continueBooking(){
+
+    if(selectedSeats.length === 0){
+
+        alert("Please select at least one seat");
+        return;
+
+    }
+
+    let passengerNames = [];
+
+    for(let i=0;i<selectedSeats.length;i++){
+
+        const name = prompt(
+            "Enter Passenger " +
+            (i+1) +
+            " Name"
+        );
+
+        if(!name){
+
+            alert("Passenger name required");
+            return;
+
+        }
+
+        passengerNames.push(name);
+
+    }
+
+    params.set(
+        "seat",
+        selectedSeats.join(", ")
+    );
+
+    params.set(
+        "passengers",
+        selectedSeats.length
+    );
+
+    params.set(
+        "names",
+        passengerNames.join("|")
+    );
+
+    const singlePrice =
+    parseInt(params.get("price")) || 0;
+
+    const totalPrice =
+    singlePrice *
+    selectedSeats.length;
+
+    params.set(
+        "totalPrice",
+        totalPrice
+    );
+
+    window.location.href =
+    "payment.html?" +
+    params.toString();
+
+}
+
+</script>
+
+</body>
+</html>

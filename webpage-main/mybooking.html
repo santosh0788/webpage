@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>My Booking</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f3f5f7;
+padding:40px;
+}
+
+.booking{
+background:white;
+padding:25px;
+width:500px;
+margin:auto;
+border-radius:20px;
+box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+margin:15px 0;
+padding-bottom:10px;
+border-bottom:1px solid #eee;
+}
+
+.label{
+color:gray;
+}
+
+.value{
+font-weight:bold;
+}
+
+.ticket-btn{
+width:100%;
+padding:14px;
+border:none;
+background:#2563eb;
+color:white;
+border-radius:12px;
+cursor:pointer;
+margin-top:20px;
+}
+
+</style>
+
+</head>
+<body>
+
+<h2 align="center">My Booking ✈️</h2>
+
+<div id="list"></div>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+
+const booking = {
+
+flight: params.get("flight"),
+from: params.get("from"),
+to: params.get("to"),
+time: params.get("time"),
+price:
+params.get("totalPrice") ||
+params.get("price"),
+seat: params.get("seat"),
+passengers: params.get("passengers"),
+names: params.get("names")
+
+};
+
+document.getElementById("list").innerHTML = `
+
+<div class="booking">
+
+<div class="row">
+<span class="label">Flight</span>
+<span class="value">${booking.flight}</span>
+</div>
+
+<div class="row">
+<span class="label">Route</span>
+<span class="value">${booking.from} → ${booking.to}</span>
+</div>
+
+<div class="row">
+<span class="label">Time</span>
+<span class="value">${booking.time}</span>
+</div>
+
+<div class="row">
+<span class="label">Seats</span>
+<span class="value">${booking.seat}</span>
+</div>
+
+<div class="row">
+<span class="label">Passengers</span>
+<span class="value">${booking.names.replaceAll("|", ", ")}</span>
+</div>
+
+<div class="row">
+<span class="label">Total</span>
+<span class="value">$${booking.price}</span>
+</div>
+
+<button class="ticket-btn" onclick="goTicket()">
+View Ticket
+</button>
+
+</div>
+
+`;
+
+function goTicket(){
+
+window.location.href =
+"ticket.html?" + params.toString();
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bronze Membership</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+
+background:
+linear-gradient(
+rgba(0,0,0,.75),
+rgba(0,0,0,.75)
+),
+url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1920&q=80');
+
+background-size:cover;
+background-position:center;
+}
+
+.card{
+width:850px;
+padding:40px;
+
+background:rgba(255,255,255,.08);
+
+backdrop-filter:blur(15px);
+
+border:3px solid #cd7f32;
+
+border-radius:25px;
+
+box-shadow:0 0 40px #cd7f32;
+
+color:white;
+}
+
+.title{
+text-align:center;
+font-size:45px;
+font-weight:700;
+color:#cd7f32;
+margin-bottom:20px;
+}
+
+.input-box{
+margin:20px 0;
+}
+
+.input-box label{
+display:block;
+margin-bottom:10px;
+font-size:18px;
+}
+
+.input-box input{
+width:100%;
+padding:15px;
+border:none;
+border-radius:12px;
+font-size:18px;
+}
+
+.verify-btn{
+width:100%;
+padding:15px;
+border:none;
+border-radius:12px;
+background:#cd7f32;
+color:white;
+font-size:18px;
+font-weight:600;
+cursor:pointer;
+}
+
+.verify-btn:hover{
+opacity:.9;
+}
+
+.result{
+display:none;
+margin-top:25px;
+}
+
+.success{
+background:rgba(34,197,94,.15);
+padding:15px;
+border-radius:12px;
+margin-bottom:20px;
+font-size:20px;
+}
+
+.benefit{
+background:rgba(255,255,255,.08);
+padding:15px;
+margin:12px 0;
+border-radius:12px;
+font-size:18px;
+}
+
+.buttons{
+display:flex;
+gap:15px;
+margin-top:25px;
+}
+
+.btn{
+flex:1;
+padding:15px;
+border:none;
+border-radius:12px;
+background:#16a34a;
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+</style>
+</head>
+<body>
+
+<div class="card">
+
+<div class="title">
+🥉 Bronze Membership
+</div>
+
+<div class="input-box">
+
+<label>
+Enter 16 Digit Membership Number
+</label>
+
+<input
+type="text"
+id="memberNo"
+maxlength="16"
+placeholder="1234567890123456">
+
+</div>
+
+<button
+class="verify-btn"
+onclick="verifyMember()">
+
+Verify Membership
+
+</button>
+
+<div
+class="result"
+id="result">
+
+<div class="success">
+🎉 Welcome Silver Member
+<br><br>
+✅ Membership Verified Successfully
+<br>
+✅ Membership Status : Active
+</div>
+
+<div class="benefit">
+✅ Free Lounge Access
+</div>
+
+<div class="benefit">
+✅ Unlimited WiFi
+</div>
+
+<div class="benefit">
+✅ Extra 10kg Baggage
+</div>
+
+<div class="benefit">
+✅ Airport Assistance
+</div>
+
+<div class="benefit">
+✅ Priority Check-In
+</div>
+
+<div class="benefit">
+✅ Dedicated Customer Support
+</div>
+</div>
+
+<div class="buttons">
+
+    <button
+    class="btn"
+    onclick="window.location.href='membership-dashboard.html'">
+
+        🏠 Back To Dashboard
+
+    </button>
+
+</div>
+
+<script>
+
+function verifyMember(){
+
+const memberNo =
+document.getElementById("memberNo").value;
+
+if(memberNo.length !== 16){
+
+alert(
+"Please Enter Valid 16 Digit Membership Number"
+);
+
+return;
+
+}
+
+document.getElementById("result")
+.style.display = "block";
+
+}
+
+</script>
+
+</body>
+</html>

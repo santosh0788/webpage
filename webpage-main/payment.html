@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flight Payment</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:#eef2f7;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+}
+
+.payment-box{
+width:550px;
+background:white;
+padding:40px;
+border-radius:25px;
+box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
+.title{
+text-align:center;
+font-size:34px;
+font-weight:600;
+margin-bottom:25px;
+}
+
+.flight{
+text-align:center;
+font-size:24px;
+font-weight:600;
+}
+
+.price{
+text-align:center;
+font-size:50px;
+color:#16a34a;
+font-weight:700;
+margin:15px 0;
+}
+
+.details{
+background:#f8fafc;
+padding:15px;
+border-radius:15px;
+margin-bottom:25px;
+}
+
+.details p{
+margin:8px 0;
+}
+
+.methods{
+display:flex;
+gap:15px;
+margin-bottom:25px;
+}
+
+.method{
+flex:1;
+padding:15px;
+border:2px solid #ddd;
+border-radius:14px;
+text-align:center;
+cursor:pointer;
+font-weight:600;
+}
+
+.method.active{
+border-color:#2563eb;
+background:#eff6ff;
+color:#2563eb;
+}
+
+.payment-section{
+display:none;
+}
+
+.payment-section.active{
+display:block;
+}
+
+.input-box{
+margin-bottom:15px;
+}
+
+.input-box label{
+display:block;
+margin-bottom:8px;
+font-weight:500;
+}
+
+.input-box input,
+.input-box select{
+width:100%;
+padding:14px;
+border:1px solid #ddd;
+border-radius:12px;
+font-size:16px;
+}
+
+.pay-btn{
+width:100%;
+padding:16px;
+border:none;
+border-radius:14px;
+background:#16a34a;
+color:white;
+font-size:18px;
+font-weight:600;
+cursor:pointer;
+margin-top:10px;
+}
+
+.pay-btn:hover{
+background:#15803d;
+}
+
+.secure{
+text-align:center;
+margin-top:15px;
+color:gray;
+font-size:14px;
+}
+
+.success{
+display:none;
+text-align:center;
+margin-top:15px;
+color:green;
+font-weight:bold;
+font-size:18px;
+}
+
+</style>
+</head>
+<body>
+
+<div class="payment-box">
+
+<div class="title">
+Flight Payment
+</div>
+
+<div class="flight" id="flight"></div>
+
+<div class="price">
+$<span id="price"></span>
+</div>
+
+<div class="details">
+<p><b>Route:</b> <span id="route"></span></p>
+<p><b>Time:</b> <span id="time"></span></p>
+<p><b>Seats:</b> <span id="seat"></span></p>
+<p><b>Passengers:</b> <span id="passengers"></span></p>
+</div>
+
+<div class="methods">
+
+<div class="method active"
+onclick="showMethod('card',this)">
+💳 Card
+</div>
+
+<div class="method"
+onclick="showMethod('upi',this)">
+📱 UPI
+</div>
+
+<div class="method"
+onclick="showMethod('bank',this)">
+🏦 Banking
+</div>
+
+</div>
+
+<div id="card" class="payment-section active">
+
+<div class="input-box">
+<label>Card Holder Name</label>
+<input type="text" id="holder">
+</div>
+
+<div class="input-box">
+<label>Card Number</label>
+<input type="text" id="cardNumber">
+</div>
+
+<div class="input-box">
+<label>Expiry Date</label>
+<input type="text" placeholder="MM/YY">
+</div>
+
+<div class="input-box">
+<label>CVV</label>
+<input type="password">
+</div>
+
+</div>
+
+<div id="upi" class="payment-section">
+
+<div class="input-box">
+<label>UPI ID</label>
+<input type="text" placeholder="example@upi">
+</div>
+
+</div>
+
+<div id="bank" class="payment-section">
+
+<div class="input-box">
+<label>Select Bank</label>
+
+<select>
+<option>SBI</option>
+<option>HDFC</option>
+<option>ICICI</option>
+<option>Axis</option>
+<option>Kotak</option>
+</select>
+
+</div>
+
+</div>
+
+<button class="pay-btn"
+onclick="payNow()">
+Pay Now
+</button>
+
+<div class="success" id="successMsg">
+✅ Payment Successful
+</div>
+
+<div class="secure">
+🔒 100% Secure Payment Gateway
+</div>
+
+</div>
+
+<script>
+
+const params =
+new URLSearchParams(window.location.search);
+
+document.getElementById("flight").innerText =
+params.get("flight");
+
+document.getElementById("route").innerText =
+(params.get("from") || "") +
+" → " +
+(params.get("to") || "");
+
+document.getElementById("time").innerText =
+params.get("time");
+
+document.getElementById("seat").innerText =
+params.get("seat") || "N/A";
+
+const passengers =
+parseInt(params.get("passengers")) || 1;
+
+document.getElementById("passengers").innerText =
+passengers;
+
+const singlePrice =
+parseInt(params.get("price")) || 0;
+
+const totalPrice =
+parseInt(params.get("totalPrice")) ||
+(singlePrice * passengers);
+
+document.getElementById("price").innerText =
+totalPrice;
+
+function showMethod(id, element){
+
+document
+.querySelectorAll(".payment-section")
+.forEach(x=>x.classList.remove("active"));
+
+document
+.querySelectorAll(".method")
+.forEach(x=>x.classList.remove("active"));
+
+document
+.getElementById(id)
+.classList.add("active");
+
+element.classList.add("active");
+
+}
+
+function payNow(){
+
+const card =
+document.getElementById("cardNumber").value;
+
+if(
+document.getElementById("card").classList.contains("active")
+){
+
+if(card.length !== 16 || isNaN(card)){
+
+alert("Enter valid 16 digit card number");
+return;
+
+}
+
+}
+
+document.getElementById("successMsg")
+.style.display = "block";
+
+setTimeout(()=>{
+
+window.location.href =
+"mybooking.html?" +
+params.toString();
+
+},1500);
+
+}
+
+</script>
+
+</body>
+</html>

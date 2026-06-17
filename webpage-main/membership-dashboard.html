@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Membership Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+
+background:
+linear-gradient(
+rgba(0,0,0,.75),
+rgba(0,0,0,.75)
+),
+url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1920&q=80');
+
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+}
+
+.card{
+width:900px;
+padding:50px;
+
+background:rgba(255,255,255,.08);
+
+backdrop-filter:blur(15px);
+
+border-radius:30px;
+
+box-shadow:0 8px 40px rgba(0,0,0,.4);
+
+color:white;
+
+text-align:center;
+}
+
+.logo{
+font-size:70px;
+margin-bottom:10px;
+}
+
+h1{
+font-size:48px;
+margin-bottom:10px;
+}
+
+.subtitle{
+font-size:18px;
+color:#d1d5db;
+margin-bottom:35px;
+}
+
+.tabs{
+display:flex;
+justify-content:center;
+gap:25px;
+margin-bottom:35px;
+}
+
+.tab{
+padding:16px 35px;
+border:none;
+border-radius:15px;
+cursor:pointer;
+font-size:20px;
+font-weight:600;
+transition:.3s;
+}
+
+.tab:hover{
+transform:translateY(-4px);
+}
+
+/* Bronze */
+
+.bronze{
+background:#cd7f32;
+color:white;
+box-shadow:0 0 20px #cd7f32;
+}
+
+/* Silver */
+
+.silver{
+background:#c0c0c0;
+color:black;
+box-shadow:0 0 20px #c0c0c0;
+}
+
+/* Gold */
+
+.gold{
+background:gold;
+color:black;
+box-shadow:0 0 20px gold;
+}
+
+.info{
+background:rgba(255,255,255,.10);
+padding:18px;
+margin:15px 0;
+border-radius:14px;
+font-size:18px;
+text-align:left;
+}
+
+.btn{
+width:100%;
+margin-top:25px;
+padding:16px;
+border:none;
+border-radius:14px;
+background:#16a34a;
+color:white;
+font-size:18px;
+font-weight:600;
+cursor:pointer;
+}
+
+.btn:hover{
+background:#15803d;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="logo">🏅</div>
+
+<h1>Membership Portal</h1>
+
+<div class="subtitle">
+Choose Your Membership Plan
+</div>
+
+<div class="tabs">
+
+<button
+class="tab bronze"
+onclick="window.location.href='bronze-membership.html'">
+🥉 Bronze
+</button>
+
+<button
+class="tab silver"
+onclick="window.location.href='silver-membership.html'">
+🥈 Silver
+</button>
+
+<button
+class="tab gold"
+onclick="window.location.href='gold-membership.html'">
+🥇 Gold
+</button>
+
+</div>
+
+<div class="info">
+✅ Bronze Membership - Travel Offers, WiFi & Priority Booking
+</div>
+
+<div class="info">
+✅ Silver Membership - Lounge Access, Unlimited WiFi & Extra Baggage
+</div>
+
+<div class="info">
+✅ Gold Membership - VIP Lounge, Airport Pickup & Premium Rewards
+</div>
+
+<div class="info">
+✅ Every Membership Requires 16 Digit Membership Number Verification
+</div>
+
+<div class="info">
+✅ Welcome Message & Benefits Display After Verification
+</div>
+
+<button
+class="btn"
+onclick="window.location.href='index.html'">
+🏠 Back To Home
+</button>
+
+</div>
+
+</body>
+</html>
