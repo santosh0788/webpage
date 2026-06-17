@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Payment</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f2f3f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* CARD */
+.container {
+  width: 420px;
+  background: #fff;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+h2 {
+  text-align: center;
+}
+
+/* SUMMARY */
+.summary {
+  background: #f4f6f8;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.summary div {
+  margin: 5px 0;
+}
+
+/* PAYMENT METHODS */
+.method {
+  border: 1px solid #ddd;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.method.active {
+  border: 2px solid green;
+  background: #eaffea;
+}
+
+/* INPUTS */
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 6px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* BUTTON */
+.pay-btn {
+  width: 100%;
+  padding: 12px;
+  background: green;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.pay-btn:hover {
+  background: darkgreen;
+}
+
+/* SUCCESS */
+.success {
+  display: none;
+  text-align: center;
+  color: green;
+  font-weight: bold;
+  margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h2>Payment 💳</h2>
+
+  <!-- SUMMARY -->
+  <div class="summary">
+    <div><b>Flight:</b> <span id="flight"></span></div>
+    <div><b>Route:</b> <span id="route"></span></div>
+    <div><b>Time:</b> <span id="time"></span></div>
+    <div><b>Total:</b> $<span id="price"></span></div>
+  </div>
+
+  <!-- METHODS -->
+  <div class="method active" onclick="selectMethod('card')">💳 Credit Card</div>
+  <div class="method" onclick="selectMethod('debit')">💳 Debit Card</div>
+  <div class="method" onclick="selectMethod('upi')">📱 UPI</div>
+  <div class="method" onclick="selectMethod('net')">🏦 Net Banking</div>
+
+  <!-- CREDIT CARD FORM -->
+  <div id="cardForm">
+    <input type="text" id="cardNumber" placeholder="Card Number (16 digits)">
+    <input type="text" placeholder="Card Holder Name">
+    <input type="text" placeholder="Expiry (MM/YY)">
+    <input type="text" placeholder="CVV">
+  </div>
+
+  <!-- NET BANKING FORM -->
+  <div id="netForm" style="display:none;">
+    <input type="text" placeholder="Bank Name">
+    <input type="text" placeholder="Username">
+    <input type="password" placeholder="Password">
+  </div>
+
+  <!-- UPI -->
+  <div id="upiForm" style="display:none;">
+    <input type="text" placeholder="Enter UPI ID">
+  </div>
+
+  <!-- BUTTON -->
+  <button class="pay-btn" onclick="payNow()">Pay Now</button>
+
+  <div class="success" id="successMsg">
+    ✅ Payment Successful! Redirecting...
+  </div>
+
+</div>
+
+<script>
+
+/* GET DATA FROM URL */
+const params = new URLSearchParams(window.location.search);
+
+document.getElementById("flight").innerText = params.get("flight");
+document.getElementById("route").innerText =
+  params.get("from") + " → " + params.get("to");
+document.getElementById("time").innerText = params.get("time");
+document.getElementById("price").innerText = params.get("price");
+
+/* METHOD SWITCH */
+function selectMethod(type) {
+  document.querySelectorAll(".method").forEach(m => m.classList.remove("active"));
+
+  event.target.classList.add("active");
+
+  document.getElementById("cardForm").style.display =
+    (type === "card" || type === "debit") ? "block" : "none";
+
+  document.getElementById("upiForm").style.display =
+    (type === "upi") ? "block" : "none";
+
+  document.getElementById("netForm").style.display =
+    (type === "net") ? "block" : "none";
+}
+
+/* PAYMENT LOGIC */
+function payNow() {
+  const card = document.getElementById("cardNumber").value;
+
+  /* CARD VALIDATION ONLY IF CARD SELECTED */
+  if (document.getElementById("cardForm").style.display === "block") {
+    if (card.length !== 16 || isNaN(card)) {
+      alert("Enter valid 16-digit card number");
+      return;
+    }
+  }
+
+  document.getElementById("successMsg").style.display = "block";
+
+  setTimeout(() => {
+    window.location.href = "ticket.html?" + window.location.search;
+  }, 1500);
+}
+
+</script>
+
+</body>
+</html>

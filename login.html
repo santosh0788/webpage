@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Airline Login</title>
+
+<style>
+/* BACKGROUND */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Airline sky theme */
+  background: linear-gradient(135deg, #87CEEB, #4facfe, #00c6ff);
+}
+
+/* GLASS CARD */
+.login-box {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 30px;
+  width: 300px;
+  border-radius: 15px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+/* TITLE */
+h2 {
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+/* INPUTS */
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+}
+
+/* BUTTON */
+button {
+  width: 100%;
+  padding: 10px;
+  background: #ff6b00;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #ff4500;
+}
+
+/* AIRLINE BRAND */
+.brand {
+  font-size: 22px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 10px;
+}
+
+/* ICON */
+.icon {
+  font-size: 30px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+
+  <div class="icon">✈️</div>
+  <div class="brand">SkyLine Airlines</div>
+
+  <h2>Login</h2>
+
+  <input id="user" placeholder="Username">
+  <input id="pass" type="password" placeholder="Password">
+
+  <button onclick="login()">Login</button>
+
+</div>
+
+<script>
+function login(){
+  const u = document.getElementById("user").value;
+  const p = document.getElementById("pass").value;
+
+  if(u && p){
+    localStorage.setItem("user", u);
+    alert("Welcome " + u + " ✈️");
+    window.location.href = "index.html";
+  } else {
+    alert("Enter details");
+  }
+}
+</script>
+
+</body>
+</html>
